@@ -20,7 +20,8 @@ class Distance:
         elif (isinstance(other, (int, float))):
             amount = float(other)
         else:
-            return NotImplemented
+            raise TypeError(f"unsupported operand type(s) for +: "
+                            f"'Distance' and '{type(other).__name__}'")
         return Distance(self.km + amount)
 
     def __iadd__(
@@ -30,21 +31,24 @@ class Distance:
         elif (isinstance(other, (int, float))):
             amount = float(other)
         else:
-            return NotImplemented
+            raise TypeError(f"unsupported operand type(s) for +=: "
+                            f"'Distance' and '{type(other).__name__}'")
         self.km += amount
         return self
 
     def __mul__(
             self, other: int | float) -> Distance:
         if not isinstance(other, (int, float)):
-            return NotImplemented
+            raise TypeError(f"unsupported operand type(s) for *: "
+                            f"'Distance' and '{type(other).__name__}'")
         amount = float(other)
         result_km = self.km * amount
         return Distance(result_km)
 
     def __truediv__(self, other: int | float) -> Distance:
         if not isinstance(other, (int, float)):
-            return NotImplemented
+            raise TypeError(f"unsupported operand type(s) for /: "
+                            f"'Distance' and '{type(other).__name__}'")
         if other == 0:
             raise ZeroDivisionError("division by zero")
         new_km = self.km / other
@@ -61,29 +65,34 @@ class Distance:
     def __lt__(self, other: Union[Distance, int, float]) -> bool:
         value = self._as_km(other)
         if value is NotImplemented:
-            return NotImplemented
+            raise TypeError(f"'<' not supported between instances of "
+                            f"'Distance' and '{type(other).__name__}'")
         return self.km < value
 
     def __gt__(self, other: Union[Distance, int, float]) -> bool:
         value = self._as_km(other)
         if value is NotImplemented:
-            return NotImplemented
+            raise TypeError(f"'<' not supported between instances of "
+                            f"'Distance' and '{type(other).__name__}'")
         return self.km > value
 
     def __eq__(self, other: Union[Distance, int, float]) -> bool:
         value = self._as_km(other)
         if value is NotImplemented:
-            return NotImplemented
+            raise TypeError(f"'==' not supported between instances of "
+                            f"'Distance' and '{type(other).__name__}'")
         return self.km == value
 
     def __le__(self, other: Union[Distance, int, float]) -> bool:
         value = self._as_km(other)
         if value is NotImplemented:
-            return NotImplemented
+            raise TypeError(f"'<=' not supported between instances of "
+                            f"'Distance' and '{type(other).__name__}'")
         return self.km <= value
 
     def __ge__(self, other: Union[Distance, int, float]) -> bool:
         value = self._as_km(other)
         if value is NotImplemented:
-            return NotImplemented
+            raise TypeError(f"'>=' not supported between instances of "
+                            f"'Distance' and '{type(other).__name__}'")
         return self.km >= value
